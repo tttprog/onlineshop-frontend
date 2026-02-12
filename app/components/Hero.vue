@@ -1,7 +1,6 @@
 <template>
-  <div class="flex flex-col gap-10">
-    <Header />
-    <slot />
+  <div dir="ltr">
+    <div class="w-full h-128 bg-gray-200 dark:bg-gray-800"></div>
   </div>
 </template>
 

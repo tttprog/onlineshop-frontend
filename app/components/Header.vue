@@ -1,6 +1,53 @@
 <template>
-  <header class="z-20 border-b bg-background/90 backdrop-blur">
-    <UiAlert icon="solar:danger-circle-broken" variant="warning" description="اعلان عمومی" icon-class="mt-0.5" />
+  <header class="z-20 border-b bg-background/90 backdrop-blur flex flex-col gap-5 mt-5">
+    <UiAlert icon="solar:danger-circle-broken" variant="warning" description="اعلان عمومی" icon-class="mt-0.5"
+      v-if="haveNotif" />
+    <UiContainer>
+      <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2 flex-wrap">
+          <UiButton variant="link" class="text-black dark:text-white" icon-placement="right" to="tel:09123456789">
+            0912345678
+            <Icon name="solar:phone-broken" size="18" />
+          </UiButton>
+        </div>
+        <div class="flex items-center gap-3">
+          <UiButton size="icon" variant="ghost" @click="changeColorMode">
+            <Icon class="size-4" :name="colorMode.value === 'dark' ? 'solar:sun-2-broken' : 'solar:moon-broken'" />
+          </UiButton>
+          <div class="flex gap-2">
+            <UiButton to="#" variant="outline" size="sm" v-if="!isAuthenticated" @click="isAuthenticated = true">ورود
+            </UiButton>
+            <UiButton to="#" size="sm" class="dark:text-white" v-if="!isAuthenticated" @click="isAuthenticated = true">
+              ثبت نام</UiButton>
+            <UiDropdownMenu v-if="isAuthenticated" dir="rtl">
+              <UiDropdownMenuTrigger as-child>
+                <UiButton variant="outline">رزیتا عسگری
+                  <Icon name="solar:alt-arrow-down-linear" />
+                </UiButton>
+              </UiDropdownMenuTrigger>
+              <UiDropdownMenuContent class="w-56">
+                <template v-for="(item, i) in menuitems" :key="i">
+                  <UiDropdownMenuLabel v-if="item.label" :label="item.label" />
+                  <UiDropdownMenuSeparator v-else-if="item.divider" />
+                  <UiDropdownMenuItem v-else-if="item.title && !item.items" :title="item.title" :icon="item.icon"
+                    :shortcut="item.shortcut" :disabled="item.disabled" :variant="item.variant ?? 'default'"
+                    @click="item.click" />
+                  <UiDropdownMenuSub v-else-if="item.title && item.items">
+                    <UiDropdownMenuSubTrigger :title="item.title" :icon="item.icon" :text-value="item.title" />
+                    <UiDropdownMenuSubContent>
+                      <template v-for="(child, k) in item.items" :key="`child-${k}`">
+                        <UiDropdownMenuSeparator v-if="child.divider" />
+                        <UiDropdownMenuItem v-else :title="child.title" :icon="child.icon" :shortcut="child.shortcut" />
+                      </template>
+                    </UiDropdownMenuSubContent>
+                  </UiDropdownMenuSub>
+                </template>
+              </UiDropdownMenuContent>
+            </UiDropdownMenu>
+          </div>
+        </div>
+      </div>
+    </UiContainer>
     <UiContainer class="flex h-16 items-center justify-between lg:h-20">
       <div class="flex items-center gap-10">
         <NuxtLink to="/" class="flex items-center gap-3">
@@ -9,9 +56,6 @@
         </NuxtLink>
       </div>
       <div class="lg:hidden gap-3 flex items-center">
-        <UiButton size="icon" variant="ghost" @click="changeColorMode">
-          <Icon class="size-4" :name="colorMode.value === 'dark' ? 'solar:sun-2-broken' : 'solar:moon-broken'" />
-        </UiButton>
         <QuickOrder />
         <UiSheet>
           <UiSheetTrigger as-child>
@@ -61,11 +105,6 @@
                     </template>
                     <UiButton to="#" class="justify-start text-base" variant="ghost" size="sm">درباره ما</UiButton>
                     <UiButton to="#" class="justify-start text-base" variant="ghost" size="sm">تماس با ما</UiButton>
-
-                    <UiGradientDivider class="my-5" />
-
-                    <UiButton to="#" class="dark:text-white">ثبت نام</UiButton>
-                    <UiButton variant="outline" to="#" class="mb-52">ورود</UiButton>
                   </div>
                 </UiScrollArea>
               </template>
@@ -123,18 +162,18 @@
         </UiNavigationMenu>
       </div>
       <div class="hidden items-center gap-3 lg:flex">
-        <QuickOrder />
-        <UiButton size="icon" variant="ghost" @click="changeColorMode">
-          <Icon class="size-4" :name="colorMode.value === 'dark' ? 'solar:sun-2-broken' : 'solar:moon-broken'" />
-        </UiButton>
-        <UiButton to="#" variant="outline" size="sm">ورود</UiButton>
-        <UiButton to="#" size="sm" class="dark:text-white">ثبت نام</UiButton>
+        <QuickOrder v-if="isAuthenticated" />
       </div>
     </UiContainer>
   </header>
 </template>
 
 <script lang="ts" setup>
+
+const haveNotif = ref(false)
+
+const isAuthenticated = ref(true)
+
 const categories = {
   "دسته بندی": {
     "زیبایی و آرایشی": [
@@ -257,5 +296,21 @@ const links = computed(() => ({
 const colorMode = useColorMode()
 
 const changeColorMode = () => colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+
+
+const menuitems = [
+  { label: "حساب کاربری" },
+  { divider: true },
+  { title: "پروفایل", icon: "solar:user-linear", click: () => navigateTo('/accounts/profile'), },
+  { title: "سفارشات", icon: "solar:box-linear", click: () => navigateTo('/accounts/orders'), },
+  { title: "سبد خرید", icon: "solar:bag-2-broken", click: () => navigateTo('/accounts/carts'), },
+  { title: "علاقه مندی ها", icon: "solar:heart-broken", click: () => navigateTo('/accounts/wishlist'), },
+  { divider: true },
+  { title: "پشتیبانی", icon: "solar:headphones-round-broken", click: () => navigateTo('/support'), },
+
+  { title: "پیگیری سفارشات", icon: "solar:map-point-search-broken", click: () => navigateTo('/order-tracking'), },
+  { divider: true },
+  { title: "خروج", icon: "solar:exit-broken", variant: "destructive", click: () => isAuthenticated.value = false, },
+];
 
 </script>

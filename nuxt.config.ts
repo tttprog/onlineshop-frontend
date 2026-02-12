@@ -53,7 +53,7 @@ export default defineNuxtConfig({
         lang: "fa",
       },
       charset: "utf-8",
-    }
+    },
   }
 
 });
