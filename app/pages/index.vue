@@ -3,7 +3,7 @@
     <Hero />
     <!--  best sugesstions -->
     <UiContainer>
-      <div class="h-120 bg-blue-800 rounded-2xl flex flex-col gap-3 px-5 py-3">
+      <div class="h-130 bg-blue-800 rounded-2xl flex flex-col gap-3 px-5 py-3">
         <div class="flex gap-5 items-center justify-between">
           <div class="flex items-center gap-3">
             <img src="/images/persent.png" alt="best suggestions!" class="bg-cover animate-bounce">

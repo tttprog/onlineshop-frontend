@@ -2,7 +2,7 @@
   <header class="z-20 border-b bg-background/90 backdrop-blur flex flex-col gap-5 mt-5">
     <UiAlert icon="solar:danger-circle-broken" variant="warning" description="اعلان عمومی" icon-class="mt-0.5"
       v-if="haveNotif" />
-    <UiContainer>
+    <UiContainer class="flex flex-col gap-5">
       <div class="flex items-center justify-between gap-3">
         <div class="flex items-center gap-2 flex-wrap">
           <UiButton variant="link" class="text-black dark:text-white" icon-placement="right" to="tel:09123456789">
@@ -46,6 +46,16 @@
             </UiDropdownMenu>
           </div>
         </div>
+      </div>
+      <div class="self-center w-full lg:w-1/2">
+        <UiInputGroup class="px-3 h-13">
+          <UiInputGroupInput placeholder="نام محصول، برند، دسته بندی و ..." />
+          <UiInputGroupAddon align="inline-end">
+            <UiInputGroupButton variant="ghost" size="sm">
+              <Icon name="solar:magnifer-broken" />
+            </UiInputGroupButton>
+          </UiInputGroupAddon>
+        </UiInputGroup>
       </div>
     </UiContainer>
     <UiContainer class="flex h-16 items-center justify-between lg:h-20">
@@ -313,4 +323,8 @@ const menuitems = [
   { title: "خروج", icon: "solar:exit-broken", variant: "destructive", click: () => isAuthenticated.value = false, },
 ];
 
+
 </script>
+
+
+<!-- TODO search input -->
