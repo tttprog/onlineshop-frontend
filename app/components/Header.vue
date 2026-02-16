@@ -1,5 +1,5 @@
 <template>
-  <header class="z-20 border-b bg-background/90 backdrop-blur flex flex-col gap-5 mt-5">
+  <header class="z-20 border-b bg-background/90 backdrop-blur flex flex-col gap-5 pt-5 top-0 sticky">
     <UiAlert icon="solar:danger-circle-broken" variant="warning" description="اعلان عمومی" icon-class="mt-0.5"
       v-if="haveNotif" />
     <UiContainer class="flex flex-col gap-5">
@@ -321,10 +321,6 @@ const menuitems = [
   { title: "پیگیری سفارشات", icon: "solar:map-point-search-broken", click: () => navigateTo('/order-tracking'), },
   { divider: true },
   { title: "خروج", icon: "solar:exit-broken", variant: "destructive", click: () => isAuthenticated.value = false, },
-];
-
+]
 
 </script>
-
-
-<!-- TODO search input -->

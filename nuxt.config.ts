@@ -5,7 +5,14 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
 
-  modules: ["@nuxtjs/color-mode", "motion-v/nuxt", "@vueuse/nuxt", "@nuxt/icon", "@nuxt/fonts"],
+  modules: [
+    "@nuxtjs/color-mode",
+    "motion-v/nuxt",
+    "@vueuse/nuxt",
+    "@nuxt/icon",
+    "@nuxt/fonts",
+    "nuxt-swiper"
+  ],
 
   imports: {
     imports: [
