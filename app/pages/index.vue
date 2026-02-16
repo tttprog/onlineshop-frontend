@@ -2,6 +2,16 @@
   <div class="flex flex-col gap-5 mb-5">
     <Hero />
     <!-- TODO trust options -->
+    <UiContainer>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+        <div
+          class=" bg-gray-100 dark:bg-gray-800 rounded-2xl h-40 flex flex-col gap-3 justify-center items-center w-full"
+          v-for="(item, index) in trustOptions" :key="index">
+          <Icon :name="item?.icon" size="60" class="text-primary" />
+          <span class="font-bold">{{ item?.title }}</span>
+        </div>
+      </div>
+    </UiContainer>
     <!--  best sugesstions -->
     <UiContainer>
       <div class="h-130 bg-blue-800 rounded-2xl flex flex-col gap-3 px-5 py-3">
@@ -65,7 +75,7 @@
       <div class="h-130 bg-orange-500 dark:bg-orange-700 rounded-2xl flex flex-col gap-3 px-5 py-3">
         <div class="flex gap-5 items-center justify-between">
           <div class="flex items-center gap-3">
-            <img src="/images/persent.png" alt="best suggestions!" class="bg-cover animate-bounce hidden lg:flex">
+            <img src="/images/trending.png" alt="best suggestions!" class="bg-cover animate-bounce hidden lg:flex w-20">
             <strong class="lg:text-2xl text-white">محبوب ترین محصولات</strong>
           </div>
           <UiButton variant="outline" icon="solar:arrow-left-broken" icon-placement="right" to="#">مشاهده
@@ -104,7 +114,7 @@
       <div class="h-130 bg-indigo-500 dark:bg-indigo-700 rounded-2xl flex flex-col gap-3 px-5 py-3">
         <div class="flex gap-5 items-center justify-between">
           <div class="flex items-center gap-3">
-            <img src="/images/persent.png" alt="best suggestions!" class="bg-cover animate-bounce hidden lg:flex">
+            <img src="/images/new.png" alt="best suggestions!" class="bg-cover animate-bounce hidden lg:flex w-20">
             <strong class="lg:text-2xl text-white">جدید ترین محصولات</strong>
           </div>
           <UiButton variant="outline" icon="solar:arrow-left-broken" icon-placement="right" to="#">مشاهده
@@ -196,6 +206,26 @@ const categoris = [
   },
 
 ]
+
+
+const trustOptions = ref([
+  {
+    icon: "solar:star-fall-minimalistic-broken",
+    title: "تحویل اکسپرس",
+  },
+  {
+    icon: "solar:shield-check-outline",
+    title: "پرداخت امن",
+  },
+  {
+    icon: "solar:refresh-outline",
+    title: "ضمانت بازگشت کالا",
+  },
+  {
+    icon: "solar:medal-ribbon-broken",
+    title: "ضمانت اصالت کالا",
+  },
+])
 
 </script>
 
