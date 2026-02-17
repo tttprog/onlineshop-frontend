@@ -1,7 +1,6 @@
 <template>
   <div class="flex flex-col gap-5 mb-5">
     <Hero />
-    <!-- TODO trust options -->
     <UiContainer>
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
         <div
@@ -141,9 +140,20 @@
         </div>
       </div>
     </UiContainer>
-
+    <UiDivider />
     <!-- TODO latest articles -->
+    <UiContainer>
+      <div class="flex flex-col items-center justify-center gap-5">
+        <h6 class="text-lg lg:text-xl font-bold">آخرین مقالات منتشر شده</h6>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-1 w-full">
+          <div class="h-60 w-full bg-red-500 rounded-2xl" v-for="(i, index) in 4" :key="index">{{ i }}</div>
+        </div>
+      </div>
+    </UiContainer>
     <!-- TODO join news -->
+    <div class="w-full bg-gray-100 dark:bg-gray-900 p-3">
+      <Newsletter />
+    </div>
     <!-- TODO footer -->
 
 

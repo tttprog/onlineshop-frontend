@@ -11,7 +11,8 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/icon",
     "@nuxt/fonts",
-    "nuxt-swiper"
+    "nuxt-swiper",
+    "@vee-validate/nuxt"
   ],
 
   imports: {
